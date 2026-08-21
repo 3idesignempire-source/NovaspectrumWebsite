@@ -166,7 +166,7 @@
         /* Social Feeds Layout */
         .feeds-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
         }
 
@@ -175,51 +175,40 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .feed-header {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--bg-color);
+            width: 100%;
         }
 
         .facebook-header { color: #1877F2; }
         .tiktok-header { color: #000000; }
 
-        .feed-embed-placeholder {
-            background-color: #f0f2f5;
-            border-radius: 10px;
-            padding: 30px 20px;
-            text-align: center;
-            min-height: 350px;
+        .feed-container {
+            width: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            overflow: hidden;
+            min-height: 500px;
         }
 
-        .btn-social {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
+        .fb-page, .fb-page iframe {
+            width: 100% !important;
+            border: none;
+            overflow: hidden;
         }
-
-        .btn-social:hover {
-            opacity: 0.9;
-        }
-
-        .btn-fb { background-color: #1877F2; }
-        .btn-tiktok { background-color: #000000; }
 
         /* Contact Details Card */
         .contact-card {
@@ -263,6 +252,13 @@
     </style>
 </head>
 <body>
+
+    <!-- Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
+    
+    <!-- TikTok Embed Script -->
+    <script async src="https://www.tiktok.com/embed.js"></script>
 
     <!-- Header / Branding -->
     <header>
@@ -325,36 +321,44 @@
             </div>
         </div>
 
-        <!-- Tab 2: Social Feeds -->
+        <!-- Tab 2: Social Feeds (Live Facebook & TikTok Embeds) -->
         <div id="social-feeds" class="tab-content">
-            <h2 class="section-title">Latest Updates & Social Feeds</h2>
+            <h2 class="section-title">Latest Updates & Public Feeds</h2>
             <div class="feeds-wrapper">
                 
-                <!-- Facebook Feed Box -->
+                <!-- Facebook Live Embed Feed -->
                 <div class="feed-box">
                     <div class="feed-header facebook-header">
-                        <i class="fa-brands fa-facebook"></i> Facebook Live Feed
+                        <i class="fa-brands fa-facebook"></i> Facebook Page Feed
                     </div>
-                    <div class="feed-embed-placeholder">
-                        <i class="fa-brands fa-facebook-square" style="font-size: 4rem; color: #1877F2; margin-bottom: 15px;"></i>
-                        <p>Follow NOVA Spectrum on Facebook for daily updates, announcements, and center activities.</p>
-                        <a href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" target="_blank" class="btn-social btn-fb">
-                            Visit Facebook Page
-                        </a>
+                    <div class="feed-container">
+                        <div class="fb-page" 
+                            data-href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" 
+                            data-tabs="timeline" 
+                            data-width="500" 
+                            data-height="600" 
+                            data-small-header="false" 
+                            data-adapt-container-width="true" 
+                            data-hide-cover="false" 
+                            data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/">NOVASpectrum Special Needs Learning Centre</a>
+                            </blockquote>
+                        </div>
                     </div>
                 </div>
 
-                <!-- TikTok Feed Box -->
+                <!-- TikTok Live Embed Feed -->
                 <div class="feed-box">
                     <div class="feed-header tiktok-header">
-                        <i class="fa-brands fa-tiktok"></i> TikTok Live Feed
+                        <i class="fa-brands fa-tiktok"></i> TikTok Channel Feed
                     </div>
-                    <div class="feed-embed-placeholder">
-                        <i class="fa-brands fa-tiktok" style="font-size: 4rem; color: #000000; margin-bottom: 15px;"></i>
-                        <p>Watch learning sessions and therapy highlights on our TikTok channel.</p>
-                        <a href="https://www.tiktok.com/@novaspectrum_rawang" target="_blank" class="btn-social btn-tiktok">
-                            Watch TikTok Videos
-                        </a>
+                    <div class="feed-container">
+                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@novaspectrum_rawang" data-unique-id="novaspectrum_rawang" data-embed-from="embed_page" style="max-width: 100%; min-width: 280px; width: 100%;">
+                            <section>
+                                <a target="_blank" href="https://www.tiktok.com/@novaspectrum_rawang?refer=embed">@novaspectrum_rawang</a>
+                            </section>
+                        </blockquote>
                     </div>
                 </div>
 
@@ -414,6 +418,13 @@
 
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
+
+            // Re-parse Facebook & TikTok embeds if needed when tab is switched
+            if (tabName === 'social-feeds') {
+                if (window.FB) {
+                    FB.XFBML.parse();
+                }
+            }
         }
     </script>
 </body>
