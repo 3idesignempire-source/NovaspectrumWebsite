@@ -108,7 +108,6 @@
             transform: translateY(-2px);
         }
 
-        /* Main Content Area */
         .container {
             max-width: 1100px;
             margin: 30px auto;
@@ -162,13 +161,13 @@
             color: var(--text-color);
         }
 
-        /* --- CAROUSEL STYLES --- */
+        /* --- CAROUSEL FOR INDIVIDUAL SINGLE FEEDS --- */
         .carousel-outer-wrapper {
             position: relative;
-            max-width: 500px;
+            max-width: 450px;
             margin: 0 auto;
             background: var(--white);
-            padding: 25px 20px;
+            padding: 20px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
@@ -196,12 +195,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            min-height: 540px;
+            min-height: 520px;
         }
 
         .feed-media-content {
             width: 100%;
-            height: 440px;
+            height: 420px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -301,10 +300,6 @@
 </head>
 <body>
 
-    <!-- Official Facebook SDK -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
-
     <!-- Header / Branding -->
     <header>
         <div class="logo-container">
@@ -317,7 +312,7 @@
     <!-- Navigation Tabs -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="openTab(event, 'services')"><i class="fa-solid fa-list-check"></i> Services</button>
-        <button class="tab-btn" onclick="openTab(event, 'social-feeds')"><i class="fa-solid fa-hashtag"></i> Live Feeds Carousel</button>
+        <button class="tab-btn" onclick="openTab(event, 'social-feeds')"><i class="fa-solid fa-hashtag"></i> Single Feeds Slider</button>
         <button class="tab-btn" onclick="openTab(event, 'contact')"><i class="fa-solid fa-address-book"></i> Contact Us</button>
     </div>
 
@@ -366,9 +361,9 @@
             </div>
         </div>
 
-        <!-- Tab 2: Carousel Section -->
+        <!-- Tab 2: Individual Feed Cards Carousel -->
         <div id="social-feeds" class="tab-content">
-            <h2 class="section-title">Latest Updates & Public Feeds</h2>
+            <h2 class="section-title">Latest Updates & Feeds</h2>
             
             <div class="carousel-outer-wrapper">
                 <button class="arrow-btn arrow-left" onclick="slideFeed(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -376,26 +371,17 @@
 
                 <div class="carousel-container" id="feedCarousel">
                     
-                    <!-- Slide 1: Facebook Official Page Stream -->
+                    <!-- Single Feed 1: Facebook Latest Post -->
                     <div class="feed-slide-card">
                         <div class="feed-media-content">
-                            <div class="fb-page" 
-                                data-href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" 
-                                data-tabs="timeline" 
-                                data-width="380" 
-                                data-height="430" 
-                                data-small-header="true" 
-                                data-adapt-container-width="true" 
-                                data-hide-cover="false" 
-                                data-show-facepile="false">
-                            </div>
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fp%2FNOVASpectrum-Special-Needs-Learning-Centre-61556572513276%2F&tabs=timeline&width=380&height=420&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
                         </div>
                         <div class="feed-source-badge badge-facebook">
-                            <i class="fa-brands fa-facebook"></i> Facebook Page Post
+                            <i class="fa-brands fa-facebook"></i> Facebook Post
                         </div>
                     </div>
 
-                    <!-- Slide 2: TikTok Live Channel Stream -->
+                    <!-- Single Feed 2: TikTok Video -->
                     <div class="feed-slide-card">
                         <div class="feed-media-content">
                             <iframe src="https://www.tiktok.com/embed/@novaspectrum_rawang" width="100%" height="100%" style="border:none; border-radius:10px;" scrolling="no" allowfullscreen></iframe>
@@ -462,10 +448,6 @@
 
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
-
-            if (tabName === 'social-feeds' && window.FB) {
-                FB.XFBML.parse();
-            }
         }
 
         // Horizontal Slide logic
