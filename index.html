@@ -162,13 +162,13 @@
             color: var(--text-color);
         }
 
-        /* --- SINGLE BOX HORIZONTAL CAROUSEL CARDS --- */
+        /* --- CAROUSEL STYLES --- */
         .carousel-outer-wrapper {
             position: relative;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             background: var(--white);
-            padding: 20px;
+            padding: 25px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
@@ -179,11 +179,10 @@
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             gap: 20px;
-            padding-bottom: 10px;
         }
 
         .carousel-container::-webkit-scrollbar {
-            display: none; /* Hide Scrollbar for clean look */
+            display: none;
         }
 
         .feed-slide-card {
@@ -197,12 +196,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            min-height: 520px;
+            min-height: 540px;
         }
 
         .feed-media-content {
             width: 100%;
-            height: 420px;
+            height: 440px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -216,9 +215,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 16px;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
         }
 
@@ -257,8 +256,8 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .arrow-left { left: -20px; }
-        .arrow-right { right: -20px; }
+        .arrow-left { left: -18px; }
+        .arrow-right { right: -18px; }
 
         /* Contact Details Card */
         .contact-card {
@@ -301,6 +300,10 @@
     </style>
 </head>
 <body>
+
+    <!-- Official Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
 
     <!-- Header / Branding -->
     <header>
@@ -363,9 +366,9 @@
             </div>
         </div>
 
-        <!-- Tab 2: Single Box Horizontal Feed Slider -->
+        <!-- Tab 2: Carousel Section -->
         <div id="social-feeds" class="tab-content">
-            <h2 class="section-title">Latest Updates & Social Feed</h2>
+            <h2 class="section-title">Latest Updates & Public Feeds</h2>
             
             <div class="carousel-outer-wrapper">
                 <button class="arrow-btn arrow-left" onclick="slideFeed(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -373,17 +376,26 @@
 
                 <div class="carousel-container" id="feedCarousel">
                     
-                    <!-- Slide 1: Latest Facebook Feed Item (Ordered by Time) -->
+                    <!-- Slide 1: Facebook Official Page Stream -->
                     <div class="feed-slide-card">
                         <div class="feed-media-content">
-                            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fp%2FNOVASpectrum-Special-Needs-Learning-Centre-61556572513276%2F&show_text=true&width=500" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true"></iframe>
+                            <div class="fb-page" 
+                                data-href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" 
+                                data-tabs="timeline" 
+                                data-width="380" 
+                                data-height="430" 
+                                data-small-header="true" 
+                                data-adapt-container-width="true" 
+                                data-hide-cover="false" 
+                                data-show-facepile="false">
+                            </div>
                         </div>
                         <div class="feed-source-badge badge-facebook">
-                            <i class="fa-brands fa-facebook"></i> Facebook Post
+                            <i class="fa-brands fa-facebook"></i> Facebook Page Post
                         </div>
                     </div>
 
-                    <!-- Slide 2: Latest TikTok Feed Item (Ordered by Time) -->
+                    <!-- Slide 2: TikTok Live Channel Stream -->
                     <div class="feed-slide-card">
                         <div class="feed-media-content">
                             <iframe src="https://www.tiktok.com/embed/@novaspectrum_rawang" width="100%" height="100%" style="border:none; border-radius:10px;" scrolling="no" allowfullscreen></iframe>
@@ -450,9 +462,13 @@
 
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
+
+            if (tabName === 'social-feeds' && window.FB) {
+                FB.XFBML.parse();
+            }
         }
 
-        // Horizontal Carousel Scroll Function
+        // Horizontal Slide logic
         function slideFeed(direction) {
             const container = document.getElementById('feedCarousel');
             const scrollAmount = container.clientWidth;
