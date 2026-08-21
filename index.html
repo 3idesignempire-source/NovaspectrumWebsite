@@ -32,12 +32,12 @@
             line-height: 1.6;
         }
 
-        /* Header / Hero Section */
+        /* Header / Branding Section */
         header {
             background: linear-gradient(135deg, #6C5CE7 0%, #a367dc 100%);
             color: var(--white);
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
@@ -49,7 +49,7 @@
             padding: 15px 30px;
             border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .logo-title {
@@ -64,7 +64,7 @@
         }
 
         .slogan {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--accent-color);
             text-transform: uppercase;
@@ -74,7 +74,7 @@
 
         .hero-desc {
             font-size: 1.2rem;
-            margin-top: 15px;
+            margin-top: 10px;
             opacity: 0.95;
         }
 
@@ -86,6 +86,7 @@
             margin: 30px auto 10px auto;
             max-width: 800px;
             padding: 0 20px;
+            flex-wrap: wrap;
         }
 
         .tab-btn {
@@ -107,7 +108,7 @@
             transform: translateY(-2px);
         }
 
-        /* Main Container */
+        /* Main Content Area */
         .container {
             max-width: 1100px;
             margin: 30px auto;
@@ -122,16 +123,15 @@
             display: block;
         }
 
-        /* Section Title */
+        /* Section Titles */
         .section-title {
             text-align: center;
             font-size: 1.8rem;
             color: var(--primary-color);
             margin-bottom: 30px;
-            position: relative;
         }
 
-        /* Services Grid */
+        /* Services Grid Layout */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -159,7 +159,7 @@
         }
 
         .service-card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-color);
         }
 
@@ -194,9 +194,9 @@
         .feed-embed-placeholder {
             background-color: #f0f2f5;
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
-            min-height: 400px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -205,39 +205,50 @@
 
         .btn-social {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            border-radius: 20px;
+            margin-top: 20px;
+            padding: 12px 25px;
+            border-radius: 25px;
             color: var(--white);
             text-decoration: none;
             font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-social:hover {
+            opacity: 0.9;
         }
 
         .btn-fb { background-color: #1877F2; }
         .btn-tiktok { background-color: #000000; }
 
-        /* Contact Details */
+        /* Contact Details Card */
         .contact-card {
             background: var(--white);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
         .contact-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 15px;
             margin-bottom: 20px;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .contact-item i {
             font-size: 1.5rem;
             color: var(--primary-color);
-            width: 30px;
+            margin-top: 3px;
+            width: 25px;
+        }
+
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
         /* Footer */
@@ -247,6 +258,7 @@
             background: #2D3436;
             color: var(--white);
             margin-top: 50px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -261,11 +273,11 @@
         <p class="hero-desc">Special Education Needs Learning Centre</p>
     </header>
 
-    <!-- Navigation Buttons -->
+    <!-- Navigation Tabs -->
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="openTab('services')"><i class="fa-solid fa-list-check"></i> Services</button>
-        <button class="tab-btn" onclick="openTab('social-feeds')"><i class="fa-solid fa-hashtag"></i> Live Feeds</button>
-        <button class="tab-btn" onclick="openTab('contact')"><i class="fa-solid fa-address-book"></i> Contact Us</button>
+        <button class="tab-btn active" onclick="openTab(event, 'services')"><i class="fa-solid fa-list-check"></i> Services</button>
+        <button class="tab-btn" onclick="openTab(event, 'social-feeds')"><i class="fa-solid fa-hashtag"></i> Live Feeds</button>
+        <button class="tab-btn" onclick="openTab(event, 'contact')"><i class="fa-solid fa-address-book"></i> Contact Us</button>
     </div>
 
     <div class="container">
@@ -325,7 +337,7 @@
                     </div>
                     <div class="feed-embed-placeholder">
                         <i class="fa-brands fa-facebook-square" style="font-size: 4rem; color: #1877F2; margin-bottom: 15px;"></i>
-                        <p>Follow NOVA Spectrum on Facebook to see daily activity updates & announcements.</p>
+                        <p>Follow NOVA Spectrum on Facebook for daily updates, announcements, and center activities.</p>
                         <a href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" target="_blank" class="btn-social btn-fb">
                             Visit Facebook Page
                         </a>
@@ -339,7 +351,7 @@
                     </div>
                     <div class="feed-embed-placeholder">
                         <i class="fa-brands fa-tiktok" style="font-size: 4rem; color: #000000; margin-bottom: 15px;"></i>
-                        <p>Watch therapy highlights and learning sessions on TikTok.</p>
+                        <p>Watch learning sessions and therapy highlights on our TikTok channel.</p>
                         <a href="https://www.tiktok.com/@novaspectrum_rawang" target="_blank" class="btn-social btn-tiktok">
                             Watch TikTok Videos
                         </a>
@@ -363,15 +375,15 @@
                 <div class="contact-item">
                     <i class="fa-solid fa-phone"></i>
                     <div>
-                        <strong>Phone / Contact:</strong><br>
+                        <strong>Phone Contact:</strong><br>
                         014-842 1474
                     </div>
                 </div>
                 <div class="contact-item">
                     <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
                     <div>
-                        <strong>WhatsApp:</strong><br>
-                        +60 14-842 1474
+                        <strong>WhatsApp Direct:</strong><br>
+                        <a href="https://wa.me/60148421474" target="_blank">+60 14-842 1474</a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -393,18 +405,15 @@
 
     <!-- JavaScript for Tab Switching -->
     <script>
-        function openTab(tabName) {
-            // Hide all tab contents
+        function openTab(evt, tabName) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Deactivate all buttons
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Show selected tab and set button as active
             document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+            evt.currentTarget.classList.add('active');
         }
     </script>
 </body>
