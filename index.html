@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Spectrum - Special Needs Learning Centre</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #6C5CE7;
+            --secondary-color: #A29BFE;
+            --accent-color: #FD79A8;
+            --bg-color: #F8F9FA;
+            --text-color: #2D3436;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #6C5CE7 0%, #a367dc 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 20px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            background: var(--white);
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .logo-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2D3436;
+            letter-spacing: 1px;
+        }
+
+        .logo-title span {
+            color: var(--primary-color);
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 5px;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            opacity: 0.95;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px auto 10px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .tab-btn {
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        /* Social Feeds Layout */
+        .feeds-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .feed-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-color);
+        }
+
+        .facebook-header { color: #1877F2; }
+        .tiktok-header { color: #000000; }
+
+        .feed-embed-placeholder {
+            background-color: #f0f2f5;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-social {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-fb { background-color: #1877F2; }
+        .btn-tiktok { background-color: #000000; }
+
+        /* Contact Details */
+        .contact-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            width: 30px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2D3436;
+            color: var(--white);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Branding -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-title">NOVA<span>Spectrum</span></div>
+            <div class="slogan">Nurturing Opportunities for Varied Abilities</div>
+        </div>
+        <p class="hero-desc">Special Education Needs Learning Centre</p>
+    </header>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="openTab('services')"><i class="fa-solid fa-list-check"></i> Services</button>
+        <button class="tab-btn" onclick="openTab('social-feeds')"><i class="fa-solid fa-hashtag"></i> Live Feeds</button>
+        <button class="tab-btn" onclick="openTab('contact')"><i class="fa-solid fa-address-book"></i> Contact Us</button>
+    </div>
+
+    <div class="container">
+        
+        <!-- Tab 1: Services -->
+        <div id="services" class="tab-content active">
+            <h2 class="section-title">Our Specialized Programs</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-child-reaching"></i>
+                    <h3>Early Intervention Program</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-comments"></i>
+                    <h3>Speech Therapy</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                    <h3>Occupational Therapy</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>ABA Therapy</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-palette"></i>
+                    <h3>Art Therapy</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <h3>Play Therapy</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <h3>Pre-Vocational Program</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h3>Primary Cambridge Program</h3>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>After School Program & DayCare</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Social Feeds -->
+        <div id="social-feeds" class="tab-content">
+            <h2 class="section-title">Latest Updates & Social Feeds</h2>
+            <div class="feeds-wrapper">
+                
+                <!-- Facebook Feed Box -->
+                <div class="feed-box">
+                    <div class="feed-header facebook-header">
+                        <i class="fa-brands fa-facebook"></i> Facebook Live Feed
+                    </div>
+                    <div class="feed-embed-placeholder">
+                        <i class="fa-brands fa-facebook-square" style="font-size: 4rem; color: #1877F2; margin-bottom: 15px;"></i>
+                        <p>Follow NOVA Spectrum on Facebook to see daily activity updates & announcements.</p>
+                        <a href="https://www.facebook.com/p/NOVASpectrum-Special-Needs-Learning-Centre-61556572513276/" target="_blank" class="btn-social btn-fb">
+                            Visit Facebook Page
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TikTok Feed Box -->
+                <div class="feed-box">
+                    <div class="feed-header tiktok-header">
+                        <i class="fa-brands fa-tiktok"></i> TikTok Live Feed
+                    </div>
+                    <div class="feed-embed-placeholder">
+                        <i class="fa-brands fa-tiktok" style="font-size: 4rem; color: #000000; margin-bottom: 15px;"></i>
+                        <p>Watch therapy highlights and learning sessions on TikTok.</p>
+                        <a href="https://www.tiktok.com/@novaspectrum_rawang" target="_blank" class="btn-social btn-tiktok">
+                            Watch TikTok Videos
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tab 3: Contact Info -->
+        <div id="contact" class="tab-content">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-card">
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <strong>Address:</strong><br>
+                        7259, Jalan Desa Permai 1, Jalan Desa, Bandar Country Homes Rawang, 48000 Selangor, Rawang, Malaysia.
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong>Phone / Contact:</strong><br>
+                        014-842 1474
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+                    <div>
+                        <strong>WhatsApp:</strong><br>
+                        +60 14-842 1474
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-door-open"></i>
+                    <div>
+                        <strong>Operating Hours:</strong><br>
+                        Always open
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Nova Spectrum Special Needs Learning Centre. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Tab Switching -->
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab and set button as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
